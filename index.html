@@ -1,39 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
+    <head>
+        <!-- metadata -->
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
 
-<head>
-    <!-- metadata -->
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <!-- title and favicon -->
+        <title>Fight Monsters</title>
+        <link rel="icon" type="image/x-icon" href="assets/alchemy-favicon.png" />
 
-    <!-- title and favicon -->
-    <title>Web App</title>
-    <link rel="icon" type="image/x-icon" href="assets/alchemy-favicon.png" />
+        <!-- js -->
+        <script type="module" src="app.js"></script>
 
-    <!-- js -->
-    <script type="module" src="app.js"></script>
+        <!-- fonts -->
+        <!-- see https://fonts.google.com/ -->
 
-    <!-- fonts -->
-    <!-- see https://fonts.google.com/ -->
+        <!-- css -->
+        <link rel="stylesheet" href="styles/reset.css" />
+        <link rel="stylesheet" href="styles/global.css" />
+        <!-- add link for page specific css -->
+    </head>
 
-    <!-- css -->
-    <link rel="stylesheet" href="styles/reset.css" />
-    <link rel="stylesheet" href="styles/global.css" />
-    <!-- add link for page specific css -->
+    <body>
+        <header>
+            <img class="logo" src="assets/html_css_js.png" alt="logo" />
+            <h1>Monster Fighter</h1>
+            <section id="message-section"></section>
 
-</head>
+            <section class="player">
+                <button id="fight-monster">Go Monster Hunting!</button>
+            </section>
+            <section class="table image-section">
+                <div id="roll-container"></div>
+            </section>
 
-<body>
-    <header>
-        <img class="logo" src="assets/html_css_js.png" alt="logo">
-        <h1>Web App</h1>
-    </header>
+            <section class="add-monsters-section">
+                <form id="add-monsters-form">
+                    <input required name="name" />
+                    <button>Add Monsters</button>
+                </form>
+                <button id="say-goodbye-button">Clear dead monsters</button>
+            </section>
 
-    <main>
+            <section id="monsters-section"></section>
+        </header>
 
-    </main>
-
-</body>
-
+        <main></main>
+    </body>
 </html>
