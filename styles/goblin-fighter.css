@@ -14,9 +14,9 @@ main {
     grid-template-columns: 50% 50%;
     grid-template-areas:
         'message   message'
-        'forest     mushrooms'
-        'add-friend add-friend'
-        'friends    friends';
+        'cave     rolls'
+        'add-monster add-monster'
+        'cave    monsters';
 }
 
 @media (min-width: 800px) {
@@ -60,7 +60,7 @@ main {
 
 .table {
     grid-area: rolls;
-    background-image: url(../assets/table.png);
+    background-image: url(../assets/.png);
     padding: 0 10% 50% 10%;
 
     display: grid;
@@ -90,7 +90,7 @@ main {
 }
 
 .add-monsters-section {
-    grid-area: add-friend;
+    grid-area: add-monster;
 
     display: grid;
     place-items: center;
@@ -102,7 +102,7 @@ main {
 }
 
 #monsters-section {
-    grid-area: friends;
+    grid-area: monsters;
 
     padding-bottom: 5%;
 
