@@ -6,12 +6,7 @@ export function renderRoll(roll) {
 }
 
 // Emojis correspond to satisfaction via index
-const emojis = [
-    './assets/goblin-emoji1.png',
-    './assets/goblin-emoji2.png',
-    './assets/goblin-emoji3.png',
-    './assets/goblin-emoji4.png',
-];
+const emojis = [``, `🤢`, `😒`, `😎`, `😜`, `😃`];
 
 export function renderMonster(monster) {
     const button = document.createElement('button');

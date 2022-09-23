@@ -1,10 +1,11 @@
 /* Imports */
-
+import { renderMonster, renderRoll } from './render-utils.js';
+import { getRandomItem } from './utils.js';
 /* Get DOM Elements */
 const messageSection = document.getElementById('message-section');
 const rollContainer = document.getElementById('roll-container');
-const huntMonstersButton = document.getElementById('hunt-monsters-button');
-const addMonsterForm = document.getElementById('add-monster-form');
+const fightMonsterButton = document.getElementById('fight-monster-button');
+const addMonsterForm = document.getElementById('add-monsters-form');
 const sayGoodbyeButton = document.getElementById('say-goodbye-button');
 const monstersSection = document.getElementById('monsters-section');
 /* State */
@@ -26,7 +27,7 @@ const oneHit = {
     value: 1,
 };
 const twoHit = {
-    type: 'onehit',
+    type: 'twohit',
     value: 2,
 };
 const threeHit = {
@@ -34,7 +35,7 @@ const threeHit = {
     value: 3,
 };
 
-const totalHit = [0, 1, 1, 2, 3];
+const totalHit = [0, 1];
 const hitTypeFound = [zeroHit, oneHit, oneHit, twoHit, threeHit];
 
 /* Events */
@@ -45,7 +46,7 @@ const hitMessage = [
     'You slash for 3 quick hits!',
 ];
 
-huntMonstersButton.addEventListener('click', () => {
+fightMonsterButton.addEventListener('click', () => {
     const found = getRandomItem(totalHit);
 
     for (let i = 0; i < found; i++) {
@@ -72,7 +73,7 @@ addMonsterForm.addEventListener('submit', (e) => {
 
     const monster = {
         name: formData.get('name'),
-        hitPoints: 3,
+        hitPoints: 5,
     };
 
     monsters.push(monster);
@@ -123,7 +124,7 @@ function displayMonsters() {
             } else {
                 rolls.pop();
                 monster.hitPoints--;
-                message = `${monster.name} has taken a hit!`;
+                message = [`${monster.name} has taken a hit!`, `a good slice!`];
             }
 
             displayMessage();
