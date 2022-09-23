@@ -2,8 +2,8 @@
 
 /* Get DOM Elements */
 const messageSection = document.getElementById('message-section');
-const mushroomContainer = document.getElementById('roll-container');
-const huntMushroomsButton = document.getElementById('hunt-monsters-button');
+const rollContainer = document.getElementById('roll-container');
+const huntMonstersButton = document.getElementById('hunt-monsters-button');
 const addMonsterForm = document.getElementById('add-monster-form');
 const sayGoodbyeButton = document.getElementById('say-goodbye-button');
 const monstersSection = document.getElementById('monsters-section');
@@ -11,9 +11,9 @@ const monstersSection = document.getElementById('monsters-section');
 let message = `The mage portal has landed you in the middle of Goblin Territory! Fight your way out!`;
 let roll = [{type: '0hit', type: '1hit', type: '1hit' , type: '2hit' , type: '3hit'}]
 let monsters = [
-    { name: 'Larx', hitpoints: 3, type: goblin },
-    { name: 'Barx', hitpoints: 3, type: goblin },
-    { name: 'Yarx', hitpoints: 3, type: goblin },
+    { name: 'Larx', hitPoints: 3, type: goblin },
+    { name: 'Barx', hitPoints: 3, type: goblin },
+    { name: 'Yarx', hitPoints: 3, type: goblin },
 ];
 
 // static types and probabilites
@@ -40,7 +40,7 @@ const hitTypeFound = [0hit, 1hit, 1hit, 2hit, 3hit];
 
 
 /* Events */
-const hitMessage = ['You swing and Miss!', 'Your blade found 1 hit', 'Your blade hit 2 times', 'You slash for 3 quick hits!'];
+const hitMessage = ['You swing and miss!', 'Your blade found 1 hit', 'Your blade hit 2 times', 'You slash for 3 quick hits!'];
 
 huntMonstersButton.addEventListener('click', () => {
     const found = getRandomItem(totalHit);
@@ -62,9 +62,42 @@ huntMonstersButton.addEventListener('click', () => {
     displayRolls();
 });
 
-add addMonsterForm
+addMonsterForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    const formData = new FormData(addMonsterForm);
+
+    const monster = {
+        name: formData.get('name'),
+        hitPoints: 3,
+    };
+
+    monsters.push(monster);
+
+    message = `${monster.name} has joined the fray!`;
+    addMonsterForm.reset();
+
+    displayMonsters()
+
+sayGoodbyeButton.addEventListener('click', () => {
+    const stillAlive = [];
+    for (const monster of monsters) {
+        if (monster.hitPoints > 0) {
+            stillAlive.push(monster);
+     }
+     monsters = stillAlive;
+     displayMonsters();
+    });    
+
 
 
 /* Display Functions */
+
+function displayMessage() {
+        messageSection.textContent = message;
+}
+
+function displayRolls() {
+    rollContainer.inner
 
 // (don't forget to call any display functions you want to run on page load!)
