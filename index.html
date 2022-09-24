@@ -13,6 +13,7 @@
         <!-- js -->
         <script type="module" src="app.js"></script>
 
+
         <!-- fonts -->
         <!-- see https://fonts.google.com/ -->
 
@@ -28,20 +29,29 @@
         <header>
             <img class="logo" src="assets/goblin-logo.png" alt="logo" />
             <h1>Goblin Fighter</h1>
-           
-            </header>
+                       </header>
+
             <main>
             <section id="message-section"></section>
 
             <section class="player">
+                <div class= "playerHp" Player HP:> </div>
                 <button id="fight-monster-button">Go Monster Hunting!</button>
             </section>
             
             <section class="die image-section">
                 <div id="roll-container"></div>
             </section>
-
-
+            
+            <section id= "monsters-dead-section" > Dead Goblins:  </section>
+            <section>
+            <div class = "scoreboard"></div>
+                <div class='scoreboard-level-name'>Player Level</div>   
+                <div class='scoreboard-deathcount-name'>DeathCount</div>   
+                <div class="scoreboard__score">0</div>
+                <div class="scoreboard__score">0</div>
+            </section>
+       
             <section class="add-monsters-section">
                 <form id="add-monsters-form">
                     <input required name="name" />
@@ -52,6 +62,7 @@
 
 
             <section id="monsters-section"></section>
+            
         </header>
 
         </main>

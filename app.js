@@ -8,9 +8,25 @@ const fightMonsterButton = document.getElementById('fight-monster-button');
 const addMonsterForm = document.getElementById('add-monsters-form');
 const sayGoodbyeButton = document.getElementById('say-goodbye-button');
 const monstersSection = document.getElementById('monsters-section');
+//const monstersDeadSection = document.getElementById('monsters-dead-section');
 /* State */
 let message = `The mage portal has landed you in the middle of Goblin Territory! Fight your way out!`;
-let rolls = ['zerohit', 'onehit', 'onehit', 'twohit', 'threehit'];
+let rolls = [
+    { type: 'zerohit' },
+    { type: 'onehit' },
+    { type: 'onehit' },
+    { type: 'twohit' },
+    { type: 'threehit' },
+];
+
+var player = {};
+player.equipment = 'sword';
+player.alive = true;
+player.Hp = 10;
+player.killCount = 0;
+player.level = 1;
+
+console.log(player);
 let monsters = [
     { name: 'Larx', hitPoints: 3, type: 'goblin' },
     { name: 'Barx', hitPoints: 3, type: 'goblin' },
@@ -26,17 +42,17 @@ const oneHit = {
     type: 'onehit',
     value: 1,
 };
-const twoHit = {
-    type: 'twohit',
-    value: 2,
-};
-const threeHit = {
-    type: 'threehit',
-    value: 3,
-};
+//const twoHit = {
+// type: 'twohit',
+// value: 2,
+//};
+//const threeHit = {
+//type: 'threehit',
+// value: 3,
+//};
 
-const totalHit = [0, 1];
-const hitTypeFound = [zeroHit, oneHit, oneHit, twoHit, threeHit];
+const totalHit = [0, 1, 1, 1, 1, 1, 2];
+const hitTypeFound = [zeroHit, oneHit]; //oneHit, twoHit, threeHit];
 
 /* Events */
 const hitMessage = [
@@ -87,11 +103,14 @@ sayGoodbyeButton.addEventListener('click', () => {
     const stillAlive = [];
 
     for (const monster of monsters) {
+        //      if (monster.hitPoints === 0) {
+        //   isDead.push(monster);
         if (monster.hitPoints > 0) {
             stillAlive.push(monster);
         }
     }
     monsters = stillAlive;
+    //monster = isDead;
     displayMonsters();
 });
 
@@ -124,7 +143,7 @@ function displayMonsters() {
             } else {
                 rolls.pop();
                 monster.hitPoints--;
-                message = [`${monster.name} has taken a hit!`, `a good slice!`];
+                message = [`${monster.name} has taken a hit!`];
             }
 
             displayMessage();

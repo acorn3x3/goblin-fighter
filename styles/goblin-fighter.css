@@ -3,7 +3,6 @@ body {
     background-size: cover;
     background-repeat: no-repeat;
     background-position: left 0 bottom 300px;
-    background-color: #5c8928;
 }
 
 main {
@@ -106,7 +105,7 @@ main {
     padding-bottom: 5%;
 
     display: flex;
-    flex-wrap: wrap-reverse;
+    flex-wrap: wrap;
     flex-direction: row-reverse;
     align-items: center;
     align-content: flex-start;
@@ -126,7 +125,7 @@ main {
 }
 
 .monster:hover {
-    background-color: rgb(255, 44, 7);
+    background-color: #f5f2f1;
 }
 
 .monster .name {
@@ -147,4 +146,26 @@ main {
     padding: 0;
     box-shadow: 0;
     font-size: 2rem;
+}
+
+#monsters-dead-section {
+    background: url('../assets/fighter.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    padding: 0 30px;
+
+    display: grid;
+    align-items: center;
+    font-weight: 600;
+    font-size: large;
+}
+
+.scoreboard {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    background-color: hsl(84, 100%, 2%);
+}
+#scoreboard-deathcount-name {
+    background-color: hsl(84, 100%, 2%);
 }
