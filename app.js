@@ -9,18 +9,23 @@ const addMonsterForm = document.getElementById('add-monsters-form');
 const sayGoodbyeButton = document.getElementById('say-goodbye-button');
 const monstersSection = document.getElementById('monsters-section');
 const heroSection = document.getElementById('hero-section');
-const playerHpEl = document.getElementById('player-HP');
+// const playerHpEl = document.getElementById('player-HP');
 const rollSound = new Audio('./assets/diceroll.wav');
+const hitSound = new Audio('./assets/swing.mp3');
 /* State */
 let message = `The mage portal has landed you in the middle of Goblin Territory! Fight your way out!`;
 let rolls = [];
+let gameOver = false;
 
-var player = {};
-player.equipment = 'sword';
-player.alive = true;
-player.Hp = 10;
-player.killCount = 0;
-player.level = 1;
+let player = [
+    {
+        equipment: 'sword',
+        alive: true,
+        hp: 10,
+        killCount: 0,
+        level: 1,
+    },
+];
 
 let monsters = [
     { name: 'Larx', hitPoints: 3, type: 'goblin' },
@@ -59,13 +64,19 @@ const hitMessage = [
 
 fightMonsterButton.addEventListener('click', () => {
     const found = getRandomItem(totalHit);
+    if (gameOver) {
+        alert('GAME OVER');
+        return;
+    }
 
     for (let i = 0; i < found; i++) {
         //get a random attack value
         const rollType = getRandomItem(hitTypeFound);
+        rollSound.play();
 
         const roll = {
             type: rollType.type,
+            value: rollType.value,
         };
 
         rolls.push(roll);
@@ -79,7 +90,10 @@ fightMonsterButton.addEventListener('click', () => {
 
 addMonsterForm.addEventListener('submit', (e) => {
     e.preventDefault();
-
+    if (gameOver) {
+        alert('GAME OVER');
+        return;
+    }
     const formData = new FormData(addMonsterForm);
 
     const monster = {
@@ -88,10 +102,9 @@ addMonsterForm.addEventListener('submit', (e) => {
     };
 
     monsters.push(monster);
-
     message = `${monster.name} has joined the fray!`;
     addMonsterForm.reset();
-
+    displayMessage();
     displayMonsters();
 });
 sayGoodbyeButton.addEventListener('click', () => {
@@ -105,14 +118,16 @@ sayGoodbyeButton.addEventListener('click', () => {
         }
     }
     monsters = stillAlive;
+    message = `The dead have been cleared from the battlefield`;
     //monster = isDead;
     displayMonsters();
+    displayMessage();
 });
 
 /* Display Functions */
 
 function displayHero() {
-    heroSection.innerHTML = 'hero info';
+    //heroSection.innerHTML =
 }
 
 function displayMessage() {
@@ -125,7 +140,6 @@ function displayRolls() {
     for (let roll of rolls) {
         const rollEl = renderRoll(roll);
         rollContainer.append(rollEl);
-        rollSound.play();
     }
 }
 
@@ -140,13 +154,12 @@ function displayMonsters() {
                 message = 'No Attacks available';
             } else if (monster.hitPoints === 0) {
                 message = `${monster.name} is dead!`;
+            } else {
+                rolls.pop();
+                monster.hitPoints--;
+                message = [`${monster.name} has taken a hit!`];
+                hitSound.play();
             }
-
-            // } else {
-            //     rolls.pop(1);
-            //     monster.hitPoints--;
-            //     message = [`${monster.name} has taken a hit!`];
-            // }
 
             displayMessage();
             displayRolls();
