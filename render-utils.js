@@ -6,7 +6,7 @@ export function renderRoll(roll) {
 }
 
 // Emojis correspond to satisfaction via index
-const emojis = [``, `🤢`, `😒`, `😎`, `😜`, `😃`];
+const emojis = [`0`, `1`, `2`, `3`, `4`, `5`];
 
 export function renderMonster(monster) {
     const button = document.createElement('button');

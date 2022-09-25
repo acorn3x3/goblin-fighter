@@ -8,16 +8,12 @@ const fightMonsterButton = document.getElementById('fight-monster-button');
 const addMonsterForm = document.getElementById('add-monsters-form');
 const sayGoodbyeButton = document.getElementById('say-goodbye-button');
 const monstersSection = document.getElementById('monsters-section');
-//const monstersDeadSection = document.getElementById('monsters-dead-section');
+const heroSection = document.getElementById('hero-section');
+const playerHpEl = document.getElementById('player-HP');
+const rollSound = new Audio('./assets/diceroll.wav');
 /* State */
 let message = `The mage portal has landed you in the middle of Goblin Territory! Fight your way out!`;
-let rolls = [
-    { type: 'zerohit' },
-    { type: 'onehit' },
-    { type: 'onehit' },
-    { type: 'twohit' },
-    { type: 'threehit' },
-];
+let rolls = [];
 
 var player = {};
 player.equipment = 'sword';
@@ -26,7 +22,6 @@ player.Hp = 10;
 player.killCount = 0;
 player.level = 1;
 
-console.log(player);
 let monsters = [
     { name: 'Larx', hitPoints: 3, type: 'goblin' },
     { name: 'Barx', hitPoints: 3, type: 'goblin' },
@@ -34,10 +29,10 @@ let monsters = [
 ];
 
 // static types and probabilites
-const zeroHit = {
-    type: 'zerohit',
-    value: 0,
-};
+// //const zeroHit = {
+//     type: 'zerohit',
+//     value: 0,
+// };
 const oneHit = {
     type: 'onehit',
     value: 1,
@@ -52,7 +47,7 @@ const oneHit = {
 //};
 
 const totalHit = [0, 1, 1, 1, 1, 1, 2];
-const hitTypeFound = [zeroHit, oneHit]; //oneHit, twoHit, threeHit];
+const hitTypeFound = [oneHit]; //oneHit, twoHit, threeHit];
 
 /* Events */
 const hitMessage = [
@@ -116,6 +111,10 @@ sayGoodbyeButton.addEventListener('click', () => {
 
 /* Display Functions */
 
+function displayHero() {
+    heroSection.innerHTML = 'hero info';
+}
+
 function displayMessage() {
     messageSection.textContent = message;
 }
@@ -126,6 +125,7 @@ function displayRolls() {
     for (let roll of rolls) {
         const rollEl = renderRoll(roll);
         rollContainer.append(rollEl);
+        rollSound.play();
     }
 }
 
@@ -140,11 +140,13 @@ function displayMonsters() {
                 message = 'No Attacks available';
             } else if (monster.hitPoints === 0) {
                 message = `${monster.name} is dead!`;
-            } else {
-                rolls.pop();
-                monster.hitPoints--;
-                message = [`${monster.name} has taken a hit!`];
             }
+
+            // } else {
+            //     rolls.pop(1);
+            //     monster.hitPoints--;
+            //     message = [`${monster.name} has taken a hit!`];
+            // }
 
             displayMessage();
             displayRolls();
@@ -154,6 +156,8 @@ function displayMonsters() {
         monstersSection.append(monsterEl);
     }
 }
+
 displayMessage();
 displayRolls();
 displayMonsters();
+displayHero();
