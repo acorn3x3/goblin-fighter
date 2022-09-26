@@ -1,0 +1,178 @@
+body {
+    background-image: url('../assets/goblinbg.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: left 0 bottom 300px;
+}
+
+main {
+    padding: 10px;
+    padding-bottom: 0;
+    display: grid;
+    grid-template-rows: 10% 50% 10% 30%;
+    grid-template-columns: 50% 50%;
+    grid-template-areas:
+        'message   message'
+        'cave     rolls'
+        'add-monster add-monster'
+        'cave    monsters';
+}
+
+@media (min-width: 800px) {
+    body {
+        background-position: bottom;
+        background-size: cover;
+    }
+
+    main {
+        grid-template-rows: 10% 15% 75%;
+        grid-template-columns: repeat(3, 33.3%);
+        grid-template-areas:
+            'messages   messages    messages'
+            'cave     rolls   add-monster'
+            'cave     rolls   monsters';
+    }
+}
+
+#message-section {
+    grid-area: messages;
+    padding: 0 30px;
+    background: rgba(181, 240, 236, 0.664);
+    display: grid;
+    align-items: center;
+    font-weight: 600;
+}
+
+.image-section {
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position-y: 98%;
+}
+
+.cave {
+    grid-area: cave;
+
+    display: grid;
+    place-items: center;
+}
+
+.die {
+    grid-area: rolls;
+    background-image: url();
+    padding: 0 10% 50% 10%;
+
+    display: grid;
+    align-items: end;
+}
+
+#monster-container {
+    align-self: end;
+
+    display: flex;
+    flex-wrap: wrap-reverse;
+    flex-direction: row;
+    align-items: flex-end;
+}
+
+#monster-container img {
+    width: 20%;
+    height: 5vw;
+    object-fit: contain;
+}
+
+@media (max-width: 800px) {
+    #roll-container img {
+        width: 33%;
+        height: 10vw;
+    }
+}
+
+.add-monsters-section {
+    grid-area: add-monster;
+
+    display: grid;
+    place-items: center;
+}
+
+.add-monsters-section input {
+    height: 38px;
+    margin-right: 10px;
+}
+
+#monsters-section {
+    grid-area: monsters;
+
+    padding-bottom: 5%;
+
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row-reverse;
+    align-items: center;
+    align-content: flex-start;
+
+    gap: 5px;
+}
+
+.monster {
+    position: relative;
+    width: 120px;
+    height: 100px;
+    background-image: './assets/goblin-emoji1.png';
+    background-color: #e41b00;
+
+    display: grid;
+    grid-template-rows: auto 1fr;
+}
+
+.monster:hover {
+    background-color: #f5f2f1;
+}
+
+.monster .name {
+    font-size: 1.2rem;
+    font-weight: 300;
+}
+
+.monster .emoji {
+    font-size: 3rem;
+}
+
+.monster .bye {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: 0;
+    border: 0;
+    padding: 0;
+    box-shadow: 0;
+    font-size: 2rem;
+}
+
+#hero-section {
+    background: url('../assets/fighter.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    padding: 0 30px;
+
+    display: grid;
+    align-items: center;
+    font-weight: 600;
+    font-size: large;
+}
+
+.scoreboard {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    background-color: hsl(84, 100%, 2%);
+}
+#scoreboard-deathcount-name {
+    background-color: hsl(84, 92%, 48%);
+}
+
+#energy-section {
+    display: grid 
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    background-color: hsl(84, 92%, 48%);
+}
