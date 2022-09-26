@@ -167,5 +167,12 @@ main {
     background-color: hsl(84, 100%, 2%);
 }
 #scoreboard-deathcount-name {
-    background-color: hsl(84, 100%, 2%);
+    background-color: hsl(84, 92%, 48%);
+}
+
+#energy-section {
+    display: grid 
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    background-color: hsl(84, 92%, 48%);
 }

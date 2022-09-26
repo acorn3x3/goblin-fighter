@@ -9,6 +9,8 @@ const addMonsterForm = document.getElementById('add-monsters-form');
 const sayGoodbyeButton = document.getElementById('say-goodbye-button');
 const monstersSection = document.getElementById('monsters-section');
 const heroSection = document.getElementById('hero-section');
+const energySection = document.getElementById('energy-section');
+
 // const playerHpEl = document.getElementById('player-HP');
 const rollSound = new Audio('./assets/diceroll.wav');
 const hitSound = new Audio('./assets/swing.mp3');
@@ -16,8 +18,8 @@ const hitSound = new Audio('./assets/swing.mp3');
 let message = `The mage portal has landed you in the middle of Goblin Territory! Fight your way out!`;
 let rolls = [];
 let gameOver = false;
-
-let player = [
+let energy = 10;
+let players = [
     {
         equipment: 'sword',
         alive: true,
@@ -83,9 +85,10 @@ fightMonsterButton.addEventListener('click', () => {
     }
 
     message = hitMessage[found];
-
+    energy--;
     displayMessage();
     displayRolls();
+    displayEnergy();
 });
 
 addMonsterForm.addEventListener('submit', (e) => {
@@ -125,9 +128,17 @@ sayGoodbyeButton.addEventListener('click', () => {
 });
 
 /* Display Functions */
+function displayEnergy() {
+    energySectionDisplay.textContent = energy;
+}
 
 function displayHero() {
-    //heroSection.innerHTML =
+    heroSection.innerHTML = '';
+    for (let player of players) {
+        const playerEL = player;
+        heroSection.append(playerEL);
+    }
+    displayHero();
 }
 
 function displayMessage() {
@@ -174,3 +185,4 @@ displayMessage();
 displayRolls();
 displayMonsters();
 displayHero();
+console.log(player);
